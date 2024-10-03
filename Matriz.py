@@ -24,10 +24,11 @@ ordem = int(input("Digite a ordem do sistema (número de variáveis, ex: 2 para 
 # Obter a matriz de coeficientes e o vetor do lado direito
 coeficientes, lado_direito = obter_matriz(ordem)
 
+# Resolver o sistema de equações lineares
 try:
     solucao = np.linalg.solve(coeficientes, lado_direito)
     print(f"Valores das variáveis: {solucao}")
 except np.linalg.LinAlgError as e:
     print(f"Erro ao resolver o sistema: {e}")
     
-    #alo
+    
