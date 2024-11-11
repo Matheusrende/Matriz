@@ -10,7 +10,7 @@ def main():
         elif escolha == 2 :
             matriz_transposta()
         elif escolha == 3 :
-            Pedrapapel()
+            Multiplicacao()
         else:
             continue
         
@@ -20,7 +20,7 @@ def main():
 
 def getopcao():
     try:
-        opcao = input('Qual jogo você quer jogar? \n 1- Jogo da velha?\n 2- Bola magica\n 3- Pedra papel e tesoura')
+        opcao = input('Qual Operação você quer Fazer? \n 1- Calculo de matriz?\n 2- Uma matriz transposta?\n 3- Multiplicação?')
         if opcao not in [1,2,3]:
                     raise Exception()
     except (ValueError,Exception):
