@@ -41,6 +41,7 @@ def calculo_de_matriz():
 
     for i in range(ordem):  # Para 'ordem' equações
         equacao = input(f"Digite os coeficientes e o termo independente da equação {i+1} (formato: a1 a2 ... an c): ")
+        
         # Converte cada entrada em Fraction para lidar com frações e números decimais
         coef = [float(Fraction(x)) for x in equacao.split()]
         matriz.append(coef)
