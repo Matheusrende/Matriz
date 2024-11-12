@@ -58,12 +58,16 @@ def calculo_de_matriz():
         
 
 def matriz_transposta():
-    # Define a matriz original
-    matriz = [
-        [1, 2, 3],
-        [4, 5, 6],
-        [7, 8, 9]
-    ]
+
+    R = int(input("Entre o numero de linhas: "))
+    C = int(input("Entre o numero de ccolunas: "))
+
+    print("Coloque os valores em uma unica linha separadamente (Separado por espaço): ")
+    entradas = list(map(int, input().split()))
+
+    # Imprime a matriz acima
+    matriz = np.array(entradas).reshape(R, C)
+    print(matriz)
 
     # Converte a lista de listas em uma matriz NumPy
     matriz_np = np.array(matriz)
