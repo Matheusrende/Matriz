@@ -10,7 +10,7 @@ def main():
         elif escolha == 2 :
             matriz_transposta()
         elif escolha == 3 :
-            Multiplicacao()
+            multiplicacao()
         else:
             continue
         
@@ -24,7 +24,7 @@ def getopcao():
         if opcao not in [1,2,3]:
                     raise Exception()
     except (ValueError,Exception):
-        print('please Enter a Value 1 or 2')
+        print('Por favor informe um valor de 1 a 3')
         
     else : 
         return opcao
@@ -78,6 +78,41 @@ def matriz_transposta():
     # Imprime a matriz transposta
     print("Matriz transposta:")
     print(transposta_np)
+    
+def multiplicacao():
+    
+# Solicita os valores para a primeira matriz
+    print("Informe o valor da primeira matriz:")
+    R = int(input("Entre o número de linhas: "))
+    C = int(input("Entre o número de colunas: "))
+    print("Coloque os valores em uma única linha separadamente (Separado por espaço): ")
+    entradas = list(map(int, input().split()))
+
+    # Cria a primeira matriz a partir das entradas
+    matriz = np.array(entradas).reshape(R, C)
+    print("Primeira matriz:")
+    print(matriz)
+
+    # Solicita os valores para a segunda matriz
+    print("Informe o valor da segunda matriz:")
+    R2 = int(input("Entre o número de linhas: "))
+    C2 = int(input("Entre o número de colunas: "))
+    print("Coloque os valores em uma única linha separadamente (Separado por espaço): ")
+    entradas2 = list(map(int, input().split()))
+
+    # Cria a segunda matriz a partir das entradas
+    matriz2 = np.array(entradas2).reshape(R2, C2)
+    print("Segunda matriz:")
+    print(matriz2)
+
+    # Verifica se é possível realizar o produto das matrizes
+    if C != R2:
+        print("Erro: o número de colunas da primeira matriz deve ser igual ao número de linhas da segunda matriz.")
+    else:
+        # Calcula o produto das matrizes
+        resultado = np.matmul(matriz, matriz2)
+        print("Resultado do produto das matrizes:")
+        print(resultado)
 
 
 
