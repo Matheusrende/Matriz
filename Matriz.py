@@ -1,36 +1,41 @@
 import numpy as np
 from fractions import Fraction
- 
+
+# Função principal que executa o programa
 def main():
     while True:
-
+        
         escolha = getopcao()
-        if escolha == 1 :
+        
+        # Executa a função correspondente com base na escolha do usuário
+        if escolha == 1:
             calculo_de_matriz()
-        elif escolha == 2 :
+        elif escolha == 2:
             matriz_transposta()
-        elif escolha == 3 :
+        elif escolha == 3:
             multiplicacao()
         else:
             continue
-        
-        request = input('Você quer continuar resolvendo? S/N? ').upper()
-        if request in ['NAO','N']:
+
+        request = input('Você quer continuar resolvendo? S/N? ').strip().upper()
+        if request in ['NAO', 'N']:
             break
 
+# Função para obter e validar a opção do usuário
 def getopcao():
-    try:
-        opcao = input('Qual Operação você quer Fazer? \n 1- Calculo de matriz?\n 2- Uma matriz transposta?\n 3- Multiplicação?')
-        if opcao not in [1,2,3]:
-                    raise Exception()
-    except (ValueError,Exception):
-        print('Por favor informe um valor de 1 a 3')
-        
-    else : 
-        return opcao
+    while True:
+        try:
+            # Pede ao usuário para escolher uma operação
+            opcao = int(input('Qual Operação você quer Fazer? \n1- Calculo de matriz\n2- Matriz transposta\n3- Multiplicação\nEscolha: '))
+            
+            # Verifica se a opção está entre as válidas (1, 2 ou 3)
+            if opcao not in [1, 2, 3]:
+                raise ValueError()  # Gera erro se a opção não está entre 1, 2 ou 3
+            return opcao
+        except ValueError:
+            print('Por favor, informe um valor numérico entre 1 e 3.')
 
-
-# Função para receber a ordem da matriz e os coeficientes do usuário
+# Função para calcular a solução de um sistema de equações lineares
 def calculo_de_matriz():
     # Obter a ordem do sistema de equações (número de variáveis)
     ordem = int(input("Digite a ordem do sistema (número de variáveis, ex: 2 para x e y): "))
@@ -39,49 +44,48 @@ def calculo_de_matriz():
     print(f"Insira os coeficientes das equações na forma: a1x1 + a2x2 + ... + anxn = c (ordem {ordem})")
     print("Você pode usar frações (ex: 1/2), números negativos e 0 para termos que não aparecem.")
 
-    for i in range(ordem):  # Para 'ordem' equações
+    # Coleta os coeficientes e termos independentes para cada equação
+    for i in range(ordem):
         equacao = input(f"Digite os coeficientes e o termo independente da equação {i+1} (formato: a1 a2 ... an c): ")
         
         # Converte cada entrada em Fraction para lidar com frações e números decimais
         coef = [float(Fraction(x)) for x in equacao.split()]
         matriz.append(coef)
 
-    coeficientes = np.array([linha[:ordem] for linha in matriz])  # Primeiros 'ordem' valores
-    lado_direito = np.array([linha[ordem] for linha in matriz])  # O último valor (c)
+    # Separa a matriz de coeficientes (primeiros 'ordem' valores) e o vetor do lado direito (último valor de cada linha)
+    coeficientes = np.array([linha[:ordem] for linha in matriz])
+    lado_direito = np.array([linha[ordem] for linha in matriz])
 
-    # Resolver o sistema de equações lineares
+    # Tenta resolver o sistema de equações lineares usando o método NumPy
     try:
         solucao = np.linalg.solve(coeficientes, lado_direito)
         print(f"Valores das variáveis: {solucao}")
     except np.linalg.LinAlgError as e:
         print(f"Erro ao resolver o sistema: {e}")
-        
 
+# Função para calcular a transposta de uma matriz
 def matriz_transposta():
-
-    R = int(input("Entre o numero de linhas: "))
-    C = int(input("Entre o numero de ccolunas: "))
-
-    print("Coloque os valores em uma unica linha separadamente (Separado por espaço): ")
+    # Recebe o número de linhas e colunas da matriz
+    R = int(input("Entre o número de linhas: "))
+    C = int(input("Entre o número de colunas: "))
+    print("Coloque os valores em uma única linha separadamente (Separado por espaço): ")
+    
+    # Coleta todos os valores da matriz em uma única linha
     entradas = list(map(int, input().split()))
 
-    # Imprime a matriz acima
+    # Converte a lista de entradas para uma matriz NumPy com a forma especificada
     matriz = np.array(entradas).reshape(R, C)
+    print("Matriz original:")
     print(matriz)
 
-    # Converte a lista de listas em uma matriz NumPy
-    matriz_np = np.array(matriz)
-
     # Calcula a matriz transposta
-    transposta_np = matriz_np.T
-
-    # Imprime a matriz transposta
+    transposta_np = matriz.T
     print("Matriz transposta:")
     print(transposta_np)
-    
+
+# Função para multiplicar duas matrizes
 def multiplicacao():
-    
-# Solicita os valores para a primeira matriz
+    # Solicita os valores para a primeira matriz
     print("Informe o valor da primeira matriz:")
     R = int(input("Entre o número de linhas: "))
     C = int(input("Entre o número de colunas: "))
@@ -105,7 +109,7 @@ def multiplicacao():
     print("Segunda matriz:")
     print(matriz2)
 
-    # Verifica se é possível realizar o produto das matrizes
+    # Verifica se é possível realizar o produto das matrizes (número de colunas da primeira deve ser igual ao número de linhas da segunda)
     if C != R2:
         print("Erro: o número de colunas da primeira matriz deve ser igual ao número de linhas da segunda matriz.")
     else:
@@ -114,6 +118,4 @@ def multiplicacao():
         print("Resultado do produto das matrizes:")
         print(resultado)
 
-
-
-    
+main()
