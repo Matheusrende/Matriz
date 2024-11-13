@@ -14,7 +14,7 @@ def main():
         else:
             continue
         
-        request = input('Você quer continuar jogando? S/N? ').upper()
+        request = input('Você quer continuar resolvendo? S/N? ').upper()
         if request in ['NAO','N']:
             break
 
