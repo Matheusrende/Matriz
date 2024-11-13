@@ -14,6 +14,8 @@ def main():
             matriz_transposta()
         elif escolha == 3:
             multiplicacao()
+        elif escolha == 4:
+            soma()
         else:
             continue
 
@@ -28,8 +30,8 @@ def getopcao():
             # Pede ao usuário para escolher uma operação
             opcao = int(input('Qual Operação você quer Fazer? \n1- Calculo de matriz\n2- Matriz transposta\n3- Multiplicação\nEscolha: '))
             
-            # Verifica se a opção está entre as válidas (1, 2 ou 3)
-            if opcao not in [1, 2, 3]:
+            # Verifica se a opção está entre as válidas (1, 2, 3 ou 4)
+            if opcao not in [1, 2, 3, 4]:
                 raise ValueError()  # Gera erro se a opção não está entre 1, 2 ou 3
             return opcao
         except ValueError:
@@ -117,5 +119,38 @@ def multiplicacao():
         resultado = np.matmul(matriz, matriz2)
         print("Resultado do produto das matrizes:")
         print(resultado)
+
+def soma():
+    # Solicita os valores para a primeira matriz
+    print("Informe o valor da primeira matriz:")
+    R = int(input("Entre o número de linhas: "))
+    C = int(input("Entre o número de colunas: "))
+    print("Coloque os valores em uma única linha separadamente (Separado por espaço): ")
+    entradas = list(map(int, input().split()))
+
+    # Cria a primeira matriz a partir das entradas
+    matriz = np.array(entradas).reshape(R, C)
+    print("Primeira matriz:")
+    print(matriz)
+
+    # Solicita os valores para a segunda matriz
+    print("Informe o valor da segunda matriz:")
+    R2 = int(input("Entre o número de linhas: "))
+    C2 = int(input("Entre o número de colunas: "))
+    print("Coloque os valores em uma única linha separadamente (Separado por espaço): ")
+    entradas2 = list(map(int, input().split()))
+
+    # Cria a segunda matriz a partir das entradas
+    matriz2 = np.array(entradas2).reshape(R2, C2)
+    print("Segunda matriz:")
+    print(matriz2)
+
+    # Verifica se é possível realizar o produto das matrizes (número de colunas da primeira deve ser igual ao número de linhas da segunda)
+    if C != R2:
+        print("Erro: o número de colunas da primeira matriz deve ser igual ao número de linhas da segunda matriz.")
+    else:
+        resultado = np.sum([matriz, matriz2], axis=0)
+        print("Resultado do produto das matrizes:")
+        print(resultado)  
 
 main()
