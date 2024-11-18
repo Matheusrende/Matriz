@@ -28,7 +28,7 @@ def getopcao():
     while True:
         try:
             # Pede ao usuário para escolher uma operação
-            opcao = int(input('Qual Operação você quer Fazer? \n1- Calculo de matriz\n2- Matriz transposta\n3- Multiplicação\nEscolha: '))
+            opcao = int(input('Qual Operação você quer Fazer? \n1- Calculo de matriz\n2- Matriz transposta\n3- Multiplicação\n4- Soma\nEscolha: '))
             
             # Verifica se a opção está entre as válidas (1, 2, 3 ou 4)
             if opcao not in [1, 2, 3, 4]:
@@ -129,6 +129,10 @@ def soma():
     entradas = list(map(int, input().split()))
 
     # Cria a primeira matriz a partir das entradas
+    if len(entradas) != R * C:
+        print("Erro: o número de elementos inseridos não corresponde ao número de linhas x colunas.")
+        return
+
     matriz = np.array(entradas).reshape(R, C)
     print("Primeira matriz:")
     print(matriz)
@@ -141,16 +145,22 @@ def soma():
     entradas2 = list(map(int, input().split()))
 
     # Cria a segunda matriz a partir das entradas
+    if len(entradas2) != R2 * C2:
+        print("Erro: o número de elementos inseridos não corresponde ao número de linhas x colunas.")
+        return
+
     matriz2 = np.array(entradas2).reshape(R2, C2)
     print("Segunda matriz:")
     print(matriz2)
 
-    # Verifica se é possível realizar o produto das matrizes (número de colunas da primeira deve ser igual ao número de linhas da segunda)
-    if C != R2:
-        print("Erro: o número de colunas da primeira matriz deve ser igual ao número de linhas da segunda matriz.")
+    # Verifica se as dimensões das matrizes são compatíveis para a soma
+    if R != R2 or C != C2:
+        print("Erro: as matrizes devem ter as mesmas dimensões para serem somadas.")
     else:
-        resultado = np.sum([matriz, matriz2], axis=0)
-        print("Resultado do produto das matrizes:")
-        print(resultado)  
+        # Calcula a soma das matrizes
+        resultado = np.add(matriz, matriz2)
+        print("Resultado da soma das matrizes:")
+        print(resultado)
+
 
 main()
