@@ -16,6 +16,8 @@ def main():
             multiplicacao()
         elif escolha == 4:
             soma()
+        elif escolha == 5:
+            sub()
         else:
             continue
 
@@ -162,5 +164,46 @@ def soma():
         print("Resultado da soma das matrizes:")
         print(resultado)
 
+def sub():
+        # Solicita os valores para a primeira matriz
+    print("Informe o valor da primeira matriz:")
+    R = int(input("Entre o número de linhas: "))
+    C = int(input("Entre o número de colunas: "))
+    print("Coloque os valores em uma única linha separadamente (Separado por espaço): ")
+    entradas = list(map(int, input().split()))
+
+    # Cria a primeira matriz a partir das entradas
+    if len(entradas) != R * C:
+        print("Erro: o número de elementos inseridos não corresponde ao número de linhas x colunas.")
+        return
+
+    matriz = np.array(entradas).reshape(R, C)
+    print("Primeira matriz:")
+    print(matriz)
+
+    # Solicita os valores para a segunda matriz
+    print("Informe o valor da segunda matriz:")
+    R2 = int(input("Entre o número de linhas: "))
+    C2 = int(input("Entre o número de colunas: "))
+    print("Coloque os valores em uma única linha separadamente (Separado por espaço): ")
+    entradas2 = list(map(int, input().split()))
+
+    # Cria a segunda matriz a partir das entradas
+    if len(entradas2) != R2 * C2:
+        print("Erro: o número de elementos inseridos não corresponde ao número de linhas x colunas.")
+        return
+
+    matriz2 = np.array(entradas2).reshape(R2, C2)
+    print("Segunda matriz:")
+    print(matriz2)
+
+    # Verifica se as dimensões das matrizes são compatíveis para a soma
+    if R != R2 or C != C2:
+        print("Erro: as matrizes devem ter as mesmas dimensões para serem somadas.")
+    else:
+        # Calcula a subtração das matrizes
+        resultado = np.subtract(matriz, matriz2)
+        print("Resultado da soma das matrizes:")
+        print(resultado)
 
 main()
