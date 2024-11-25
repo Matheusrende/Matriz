@@ -30,10 +30,10 @@ def getopcao():
     while True:
         try:
             # Pede ao usuário para escolher uma operação
-            opcao = int(input('Qual Operação você quer Fazer? \n1- Calculo de matriz\n2- Matriz transposta\n3- Multiplicação\n4- Soma\nEscolha: '))
+            opcao = int(input('Qual Operação você quer Fazer? \n1- Calculo de matriz\n2- Matriz transposta\n3- Multiplicação\n4- Soma\n5- Subtração\nEscolha: '))
             
             # Verifica se a opção está entre as válidas (1, 2, 3 ou 4)
-            if opcao not in [1, 2, 3, 4]:
+            if opcao not in [1, 2, 3, 4,5]:
                 raise ValueError()  # Gera erro se a opção não está entre 1, 2 ou 3
             return opcao
         except ValueError:
