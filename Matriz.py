@@ -37,7 +37,7 @@ def getopcao():
                 raise ValueError()  # Gera erro se a opção não está entre 1, 2 ou 3
             return opcao
         except ValueError:
-            print('Por favor, informe um valor numérico entre 1 e 3.')
+            print('Por favor, informe um valor numérico entre 1 e 5.')
 
 # Função para calcular a solução de um sistema de equações lineares
 def calculo_de_matriz():
